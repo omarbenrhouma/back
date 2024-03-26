@@ -1,0 +1,223 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Users Management",
+      "description":"add , update and delete users",
+      "version": "1.0.0"
+    },
+    "paths": {
+      "/users": {
+        "get": {
+          "summary": "Get a list of users",
+          "responses": {
+            "200": {
+              "description": "A list of users",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/User"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a new user",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "The created user",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/users/{id}": {
+        "get": {
+          "summary": "Get a user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the user",
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "The user",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "summary": "Update a user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the user",
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInput"
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "The updated user",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete a user by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "description": "The ID of the user",
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          ],
+          "responses": {      "204": {
+            "description": "User deleted successfully"
+          }
+        }
+      }
+    }
+},
+"components": {
+"schemas": {
+"User": {
+"type": "object",
+"properties": {
+"id": {
+"type": "string"
+},
+"imageUrl": {
+    "type": "string"
+    },
+"firstName": {
+"type": "string",
+"required":true
+
+},
+"lastName": {
+    "type": "string",
+    "required":true
+
+    },
+"email": {
+"type": "string",
+"format": "email",
+"required":true
+
+},
+"contactNumber": {
+    "type": "string",
+    "required":true
+    },
+    "age": {
+        "type": "string",
+        "required":true
+        },
+        "dob": {
+            "type": "string",
+            "required":true
+            },
+            "salary": {
+                "type": "number",
+                "required":true
+                },
+                "address": {
+                    "type": "string",
+                    "required":true
+                    }
+}
+},
+"UserInput": {
+"type": "object",
+"properties": {
+"firstName": {
+"type": "string"
+},
+"lastName": {
+    "type": "string"
+    },
+"email": {
+        "type": "string",
+        "format": "email"
+        },
+"contactNumber": {
+            "type": "Number"
+            },
+"age": {
+"type": "Number"
+},
+"dob": {
+    "type": "string"
+    },
+    "salary": {
+        "type": "Number"
+        },
+        "address": {
+            "type": "string"
+            }
+    },
+"required": ["firstName", "lastName","email","contactNumber","age","salary","dob","address"]
+}
+}
+}
+}
+
+      
